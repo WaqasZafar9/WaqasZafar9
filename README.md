@@ -1,11 +1,13 @@
 - 👋 Hi, I’m @WaqasZafar9
 - 👀 I’m interested in AI, Blockchain, API, Cloud, Game Develpmont.
 - 🌱 I’m currently learning c++ , C# And Python [Programming and Algorithems].
-- 🌱   Frot End WEB DEVELOPMENT
+- 🌱 Frot End WEB DEVELOPMENT
 - 💞️ I’m looking to collaborate on Future projects.
 - 📫 How to reach me https://www.linkedin.com/in/waqas-zafar-291726253 OR mwaqaszafar76@gmail.com
 - 📫 CHECK ME OUT ONLINE https://waqas-zafar.netlify.app/
 - ![profile card](https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/aecab3b7-6b7d-4f86-a430-7d0463895fce)
+- [README.md](https://github.com/WaqasZafar9/WaqasZafar9/files/12226219/README.md)
+
 
 
 
