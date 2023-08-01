@@ -38,7 +38,8 @@
 <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=waqaszafar9&show_icons=true&locale=en" alt="waqaszafar9" /></p>
 
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=waqaszafar9&" alt="waqaszafar9" /></p>
-- ![profile card](https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/aecab3b7-6b7d-4f86-a430-7d0463895fce)
+![profile card1](https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/6d828d55-e9da-4c4e-8991-74ecd6eb7b3b)
+
 
 <!---
 WaqasZafar9/WaqasZafar9 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
