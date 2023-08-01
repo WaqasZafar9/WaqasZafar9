@@ -37,8 +37,9 @@
 
 <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=waqaszafar9&show_icons=true&locale=en" alt="waqaszafar9" /></p>
 
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=waqaszafar9&" alt="waqaszafar9" /></p>
-![profile card1](https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/6d828d55-e9da-4c4e-8991-74ecd6eb7b3b)
+<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=waqaszafar9&" alt="waqaszafar9" />![profile card1](https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/f1e27af4-2e66-4df3-a37c-485d757142a1)
+</p>
+
 
 
 <!---
