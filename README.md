@@ -21,6 +21,9 @@
 
 - ⚡ Fun fact **Nothing**
 
+- ![profile card1](https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/a9e5ec48-de0b-4b11-8129-f8130dee2b2e)
+
+
 <h3 align="left">Connect with me:</h3>
 <p align="left">
 <a href="https://twitter.com/waqas_zafar_01" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="waqas_zafar_01" height="30" width="40" /></a>
@@ -37,7 +40,7 @@
 
 <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=waqaszafar9&show_icons=true&locale=en" alt="waqaszafar9" /></p>
 
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=waqaszafar9&" alt="waqaszafar9" />![profile card1](https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/f1e27af4-2e66-4df3-a37c-485d757142a1)
+<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=waqaszafar9&" alt="waqaszafar9" />
 </p>
 
 
