@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm M WAQAS ZAFAR</h1>
-<h3 align="center">Student At Computer Science from Pakistan | C++ c# | Learing Python, Programming [Algo & Loics] | Frontend Devolpment [HTML CSS BOOT JS]</h3>
+<h3 align="center">Student At Computer Science from Pakistan | C++ C# | Learing Python, Programming [Algo & Logics] | Frontend Devolpment [HTML CSS BOOT JS]</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=waqaszafar9&label=Profile%20views&color=0e75b6&style=flat" alt="waqaszafar9" /> </p>
 
@@ -38,7 +38,7 @@
 <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=waqaszafar9&show_icons=true&locale=en" alt="waqaszafar9" /></p>
 
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=waqaszafar9&" alt="waqaszafar9" /></p>
-
+- ![profile card](https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/aecab3b7-6b7d-4f86-a430-7d0463895fce)
 
 <!---
 WaqasZafar9/WaqasZafar9 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
