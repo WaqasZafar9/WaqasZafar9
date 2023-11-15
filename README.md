@@ -21,7 +21,8 @@
 
 - ⚡ Fun fact **Nothing**
 
-- ![profile card1]![Screenshot 2023-11-15 212742](https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/9bf30886-78ac-4a83-a4fb-eb31444d7422)
+- ![profile card1]
+- ![Screenshot 2023-11-15 212742](https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/9bf30886-78ac-4a83-a4fb-eb31444d7422)
 
 
 <h3 align="left">Connect with me:</h3>
