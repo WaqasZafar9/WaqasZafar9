@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm M WAQAS ZAFAR</h1>
-<h3 align="center">Student At Computer Science from Pakistan | C++ C# | Learing Python, Programming [Algo & Logics] | Frontend Devolpment [HTML CSS BOOT JS]</h3>
+<h3 align="center">Student At Computer Science from Pakistan | C++ C# | Learing JAVA, Python, Programming [Algo & Logics] | Frontend Devolpment [HTML CSS BOOT JS]</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=waqaszafar9&label=Profile%20views&color=0e75b6&style=flat" alt="waqaszafar9" /> </p>
 
@@ -7,9 +7,9 @@
 
 <p align="left"> <a href="https://twitter.com/waqas_zafar_01" target="blank"><img src="https://img.shields.io/twitter/follow/waqas_zafar_01?logo=twitter&style=for-the-badge" alt="waqas_zafar_01" /></a> </p>
 
-- 🌱 I’m currently learning **C++ | C# | PYTHON | Frontend AND Backend WEB-DEV**
+- 🌱 I’m currently learning **C++ | JAVA | PYTHON | C# | Frontend AND Backend WEB-DEV**
 
-- 👨‍💻 ONLINE PORTFOLIO [https://waqas-zafar.netlify.app/](https://waqas-zafar.netlify.app/)
+- 👨‍💻 ONLINE PORTFOLIO [https://mwaqaszafar.netlify.app/](https://mwaqaszafar.netlify.app/)
 
 - 📫 How to reach me [https://github.com/WaqasZafar9](https://github.com/WaqasZafar9)
 
@@ -40,8 +40,8 @@
 
 <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=waqaszafar9&show_icons=true&locale=en" alt="waqaszafar9" /></p>
 
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=waqaszafar9&" alt="waqaszafar9" />
-</p>
+/*<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=waqaszafar9&" alt="waqaszafar9" />
+</p>*/
 
 
 
