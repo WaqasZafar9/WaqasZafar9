@@ -5,9 +5,9 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=waqaszafar9" alt="waqaszafar9" /></a> </p>
 
-<p align="left"> <a href="https://twitter.com/waqas_zafar_01" target="blank"><img src="https://img.shields.io/twitter/follow/waqas_zafar_01?logo=twitter&style=for-the-badge" alt="waqas_zafar_01" /></a> </p>
+<p align="left"> <a href="https://linkedin.com/in/m-waqas-zafar-291726253" target="blank"><img src="https://img.shields.io/linkedin/follow/m-waqas-zafar?logo=linkedin&style=for-the-badge" alt="m-waqas-zafar" /></a> </p>
 
-- 🌱 I’m currently learning **C++ | JAVA | PYTHON | C# | Frontend AND Backend WEB-DEV**
+- 🌱 I’m currently learning **C++ | JAVA | PYTHON | C# | WEB-DEV | Aspiring Software engineer**
 
 - 👨‍💻 ONLINE PORTFOLIO [https://mwaqaszafar.netlify.app/](https://mwaqaszafar.netlify.app/)
 
@@ -19,9 +19,8 @@
 
 - 📫 How to reach me [linkedin.com/in/m-waqas-zafar-291726253](linkedin.com/in/m-waqas-zafar-291726253)
 
-- ⚡ Fun fact **Nothing**
+- ⚡ Fun fact **if it work, don't touch again**
 
-- ![profile card1]
 - ![Screenshot 2023-11-15 212742](https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/9bf30886-78ac-4a83-a4fb-eb31444d7422)
 
 
