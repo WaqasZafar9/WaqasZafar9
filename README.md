@@ -5,7 +5,7 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=waqaszafar9" alt="waqaszafar9" /></a> </p>
 
-<p align="left"> <a href="https://linkedin.com/in/m-waqas-zafar-291726253" target="blank"><img src="https://img.shields.io/linkedin/follow/m-waqas-zafar?logo=linkedin&style=for-the-badge" alt="m-waqas-zafar" /></a> </p>
+<p align="left"> <a href="https://linkedin.com/in/m-waqas-zafar-291726253" target="blank"><img src="https://img.shields.io/linkedin/follow/m-waqas-zafar?logo=linkedin&style=for-the-badge" alt="M WAQAS ZAFAR" /></a> </p>
 
 - 🌱 I’m currently learning **C++ | JAVA | PYTHON | C# | WEB-DEV | Aspiring Software engineer**
 
