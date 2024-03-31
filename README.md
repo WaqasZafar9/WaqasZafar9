@@ -7,13 +7,13 @@
 
 <p align="left"> <a href="https://linkedin.com/in/m-waqas-zafar-291726253" target="blank"><img src="https://img.shields.io/linkedin/follow/m-waqas-zafar?logo=linkedin&style=for-the-badge" alt="M WAQAS ZAFAR" /></a> </p>
 
-- 🌱 I’m currently learning **C++ | JAVA | PYTHON | C# | WEB-DEV | Aspiring Software engineer**
+- 🌱 I’m currently learning **C++ | JAVA | PYTHON | C# | WEB-DEV | APP-DEV [FLUTTER]**
 
 - 👨‍💻 ONLINE PORTFOLIO [https://mwaqaszafar.netlify.app/](https://mwaqaszafar.netlify.app/)
 
 - 📫 How to reach me [https://github.com/WaqasZafar9](https://github.com/WaqasZafar9)
 
-- 👀 I’m interested in **AI | CYBER | WEB-DEV | BLOCKCHAIN | GAME DEVELOPMENT**
+- 👀 I’m interested in **AI | CYBER | APP-DEV | BLOCKCHAIN | GAME DEVELOPMENT**
 
 - 📫 How to reach me **mwaqaszafar76@gmail.com**
 
