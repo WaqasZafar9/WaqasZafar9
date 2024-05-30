@@ -7,7 +7,7 @@
 
 <p align="left"> <a href="https://linkedin.com/in/m-waqas-zafar-291726253" target="blank"><img src="https://img.shields.io/linkedin/follow/m-waqas-zafar?logo=linkedin&style=for-the-badge" alt="M WAQAS ZAFAR" /></a> </p>
 
-- 🌱 I’m currently learning **C++ | JAVA | PYTHON | C# | WEB-DEV | APP-DEV [FLUTTER]**
+- 🌱 I’m currently learning ** PYTHON | WEB-DEV design | APP-DEV [FLUTTER]**
 
 - 👨‍💻 ONLINE PORTFOLIO [https://mwaqaszafar.netlify.app/](https://mwaqaszafar.netlify.app/)
 
