@@ -9,7 +9,7 @@
 
 - 🌱 I’m currently learning ** PYTHON | WEB-DEV design | APP-DEV [FLUTTER]**
 
-- 👨‍💻 ONLINE PORTFOLIO [https://mwaqaszafar.netlify.app/](https://mwaqaszafar.netlify.app/)
+- 👨‍💻 ONLINE PORTFOLIO [M WAQAS ZAFAR](https://m-waqaszafar.vercel.app/)
 
 - 📫 How to reach me [https://github.com/WaqasZafar9](https://github.com/WaqasZafar9)
 
@@ -21,7 +21,7 @@
 
 - ⚡ Fun fact **if it work, don't touch again**
 
-- ![Screenshot 2023-11-15 212742](https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/9bf30886-78ac-4a83-a4fb-eb31444d7422)
+<img src="https://github.com/WaqasZafar9/WaqasZafar9/assets/120492459/9bf30886-78ac-4a83-a4fb-eb31444d7422" alt="Screenshot 2023-11-15 212742" width="400" height="300" />
 
 
 <h3 align="left">Connect with me:</h3>
