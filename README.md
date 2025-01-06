@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm M WAQAS ZAFAR</h1>
-<h3 align="center">Student At Computer Science from Pakistan | C++ / C# | Learing Python, React & Node| APP Devolpment & Frontend Devolpment </h3>
+<h3 align="center">Student At Computer Science from Pakistan | C++ / C# | Learing Python, React & Node | Flutter </h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=waqaszafar9&label=Profile%20views&color=0e75b6&style=flat" alt="waqaszafar9" /> </p>
 
