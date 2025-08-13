@@ -13,7 +13,7 @@
 
 - 📫 How to reach me [https://github.com/WaqasZafar9](https://github.com/WaqasZafar9)
 
-- 👀 I’m interested in **AI | CYBER | APP-DEV | BLOCKCHAIN | GAME DEVELOPMENT**
+- 👀 I’m interested in **AI | CYBER | APP-DEV | Web Apps | Automation**
 
 - 📫 How to reach me **mwaqaszafar76@gmail.com**
 
