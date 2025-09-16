@@ -1,5 +1,5 @@
 <h1 align="center">✨ M. Waqas Zafar ✨</h1>  
-<h3 align="center">🚀 Software Engineer | 💻 Frontend Dev | 📱 Web & Mobile Enthusiast</h3>  
+<h3 align="center">🚀 Software Engineer | 💻 Frontend Dev | 📱 Web & Mobile Apss</h3>  
 
 # 💫 About Me:
 🌟 **“Turning ideas into code & code into experiences.”** 🌟  
@@ -15,7 +15,7 @@
 - 👯 Open to **collaborations** on web & mobile apps  
 - 🤝 Looking for help with **React Native & cloud integrations**  
 - 🌱 Learning **React Native & advanced frontend concepts**  
-- 💬 Ask me about ⚛️ **React.js**, 🔥 **Next.js**, 🎨 **Tailwind CSS**, 🐦 **Flutter basics**  
+- 💬 Ask me about **🔥Software Development,⚛️ Frontend Engineering, Web Apps, Mobile Apps, and 🐦 Cloud Basics**
 - ⚡ Fun fact: **AI is just vibe coding 🪄**  
 
 ---
