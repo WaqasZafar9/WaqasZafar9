@@ -1,24 +1,28 @@
-<h1 align="center">I am M. Waqas Zafar</h1>  
-<h3 align="center">A Software Engineer passionate about Web & Mobile App Development</h3>  
+<h1 align="center">✨ M. Waqas Zafar ✨</h1>  
+<h3 align="center">🚀 Software Engineer | 💻 Frontend Dev | 📱 Web & Mobile Enthusiast</h3>  
 
 # 💫 About Me:
-🚀 **M. Waqas Zafar**  
-“Turning ideas into code & code into experiences.”  
+🌟 **“Turning ideas into code & code into experiences.”** 🌟  
 
-🌱 Frontend Engineer Intern → on the path to Associate Software Engineer  
-💻 Building **Web Apps (React.js, Next.js, Tailwind CSS)** & exploring **Mobile Apps (React Native, Flutter)**  
+🌱 **Frontend Engineer Intern** → on the path to **Associate Software Engineer**  
+💻 Building **Web Apps** (⚛️ React.js | 🔥 Next.js | 🎨 Tailwind CSS) & exploring **Mobile Apps** (📱 React Native | 🐦 Flutter)  
 ⚡ Always learning, experimenting, and creating with tech  
 
-### 👨‍💻 About Me
-- 🔭 Currently working on **React & Next.js projects**  
-- 👯 Open to collaborate on **web & mobile app development**  
+---
+
+### 👨‍💻 What I Do  
+- 🔭 Working on **React & Next.js projects**  
+- 👯 Open to **collaborations** on web & mobile apps  
 - 🤝 Looking for help with **React Native & cloud integrations**  
-- 🌱 Learning **React Native & advanced frontend engineering**  
-- 💬 Ask me about **React.js, Next.js, Tailwind CSS, Flutter basics**  
+- 🌱 Learning **React Native & advanced frontend concepts**  
+- 💬 Ask me about ⚛️ **React.js**, 🔥 **Next.js**, 🎨 **Tailwind CSS**, 🐦 **Flutter basics**  
 - ⚡ Fun fact: **AI is just vibe coding 🪄**  
 
-### 📫 Connect
+---
+
+### 📫 Connect with Me  
 🌐 [Portfolio](https://mwaqasprofile.vercel.app) | 💼 [LinkedIn](http://www.linkedin.com/in/m-waqas-zafar) | 🐙 [GitHub](https://github.com/WaqasZafar9)  
+
 
 
 ## 🌐 Socials:
