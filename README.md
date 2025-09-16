@@ -35,7 +35,10 @@
   <img src="https://github-readme-stats.vercel.app/api?username=WaqasZafar9&theme=gruvbox&hide_border=false&include_all_commits=true&count_private=true" height="160px"/>  
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=WaqasZafar9&theme=gruvbox&hide_border=false&include_all_commits=true&count_private=true&layout=compact" height="160px" style="margin-left: 20px;"/>
 </div>
-![](https://nirzak-streak-stats.vercel.app/?user=WaqasZafar9&theme=gruvbox&hide_border=false)
+<div align="center">
+  <img src="https://nirzak-streak-stats.vercel.app/?user=WaqasZafar9&theme=gruvbox&hide_border=false" height="160px"/>
+</div>
+
 
 ### 🔝 Top Contributed Repo
 ![](https://github-contributor-stats.vercel.app/api?username=WaqasZafar9&limit=5&theme=gruvbox&combine_all_yearly_contributions=true)
