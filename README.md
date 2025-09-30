@@ -1,4 +1,4 @@
-<h1 align="center"> M. Waqas Zafar </h1>  
+<h1 align="center"> M Waqas Zafar </h1>  
 <h3 align="center">🚀 Software Engineer | 💻 Frontend Dev | 📱 Web & Mobile Apss</h3>  
 
 # 💫 About Me:
