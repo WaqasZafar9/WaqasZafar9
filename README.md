@@ -1,7 +1,7 @@
 <h1 align="center"> M Waqas Zafar </h1>  
 <h3 align="center"> Software Engineer | Frontend Dev | Web & Mobile Apss</h3>  
 
-# 💫 About Me:
+# About Me:
 🌟 **“Turning ideas into code & code into experiences.”** 🌟  
 
 🌱 **Frontend Engineer Intern** → on the path to **Associate Software Engineer**  
