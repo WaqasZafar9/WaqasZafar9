@@ -2,21 +2,21 @@
 <h3 align="center"> Software Engineer | Frontend Dev | Web & Mobile Apss</h3>  
 
 # About Me:
-🌟 **“Turning ideas into code & code into experiences.”** 🌟  
+ **“Turning ideas into code & code into experiences.”** 
 
-🌱 **Frontend Engineer Intern** → on the path to **Associate Software Engineer**  
-💻 Building **Web Apps** (⚛️ React.js | 🔥 Next.js | 🎨 Tailwind CSS) & exploring **Mobile Apps** (📱 React Native | 🐦 Flutter)  
-⚡ Always learning, experimenting, and creating with tech  
+ **Frontend Engineer Intern** → on the path to **Associate Software Engineer**  
+   Building **Web Apps** ( React.js |  Next.js |  Tailwind CSS) & exploring **Mobile Apps** ( React Native |  Flutter)  
+   Always learning, experimenting, and creating with tech  
 
 ---
 
-### 👨‍💻 What I Do  
-- 🔭 Working on **React & Next.js projects**  
-- 👯 Open to **collaborations** on web & mobile apps  
-- 🤝 Looking for help with **React Native & cloud integrations**  
-- 🌱 Learning **React Native & advanced frontend concepts**  
-- 💬 Ask me about **🔥Software Development,⚛️ Frontend Engineering, Web Apps, Mobile Apps, and 🐦 Cloud Basics**
-- ⚡ Fun fact: **AI is just vibe coding 🪄**  
+###  What I Do  
+-  Working on **React & Next.js projects**  
+-  Open to **collaborations** on web & mobile apps  
+-  Looking for help with **React Native & cloud integrations**  
+-  Learning **React Native & advanced frontend concepts**  
+-  Ask me about **Software Development, Frontend Engineering, Web Apps, Mobile Apps, and  Cloud Basics**
+-  Fun fact: **AI is just vibe coding**  
 
 ---
 
