@@ -21,7 +21,7 @@
 ---
 
 ### 📫 Connect with Me  
-🌐 [Portfolio](https://mwaqasprofile.vercel.app) | 💼 [LinkedIn](http://www.linkedin.com/in/m-waqas-zafar) | 🐙 [GitHub](https://github.com/WaqasZafar9)  
+🌐 [Portfolio](https://waqaszafar.netlify.app/) | 💼 [LinkedIn](http://www.linkedin.com/in/m-waqas-zafar) | 🐙 [GitHub](https://github.com/WaqasZafar9)  
 
 
 
