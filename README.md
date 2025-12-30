@@ -4,8 +4,8 @@
 # About Me:
  **“Turning ideas into code & code into experiences.”** 
 
- **Frontend Engineer Intern** → on the path to **Associate Software Engineer**  
-   Building **Web Apps** ( React.js |  Next.js |  Tailwind CSS) & exploring **Mobile Apps** ( React Native |  Flutter)  
+ **Frontend Engineer** → on the path to **Associate Software Engineer**  
+   Building **Web Apps** ( React.js |  Next.js |  Tailwind CSS) & **Mobile Apps** ( React Native |  Flutter)  
    Always learning, experimenting, and creating with tech  
 
 ---
