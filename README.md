@@ -52,9 +52,9 @@
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=WaqasZafar9&theme=radical" />
 </p>
 
-<div align="center">
+<!-- <div align="center">
   <img src="https://nirzak-streak-stats.vercel.app/?user=WaqasZafar9&theme=gruvbox&hide_border=false" height="160px"/>
-</div>
+</div> -->
 
 
 ###  Top Contributed Repo
