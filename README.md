@@ -39,7 +39,7 @@
 # 📊 GitHub Stats:
 
 <p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=WaqasZafar9&theme=radical" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=WaqasZafar9&theme=radical&v=1" />
 </p>
 
 <p align="center">
