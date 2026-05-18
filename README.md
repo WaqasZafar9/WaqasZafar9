@@ -35,6 +35,7 @@
   <img src="https://github-readme-stats.vercel.app/api?username=WaqasZafar9&theme=gruvbox&hide_border=false&include_all_commits=true&count_private=true" height="160px"/>  
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=WaqasZafar9&theme=gruvbox&hide_border=false&include_all_commits=true&count_private=true&layout=compact" height="160px" style="margin-left: 20px;"/>
 </div> -->
+
 # 📊 GitHub Stats:
 
 <p align="center">
