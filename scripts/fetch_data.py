@@ -104,9 +104,10 @@ def main():
     profile_repo = f"{LOGIN}/{LOGIN}".lower()
     repos = [repo_entry(n) for n in cc["commitContributionsByRepository"]
              if n["repository"]["nameWithOwner"].lower() != profile_repo]
-    if cc["restrictedContributionsCount"] and OUT.exists():
-        # This token can't see private repos. Keep the private ones from the last
-        # run with a better token rather than silently dropping them.
+    if not any(r["private"] for r in repos) and OUT.exists():
+        # No private repos came back, so this token can't see them (the built-in
+        # Actions token never can). Keep the private ones from the last run with a
+        # better token, or from the seed, rather than silently dropping them.
         seen = {r["name"] for r in repos}
         old = json.loads(OUT.read_text()).get("repos", [])
         repos += [r for r in old if r.get("private") and r["name"] not in seen]
