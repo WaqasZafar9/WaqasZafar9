@@ -113,7 +113,21 @@ def public_calendar():
         m = re.match(r"\s*(\d+|No) contribution", text)
         if d and m:
             out[d] = 0 if m.group(1) == "No" else int(m.group(1))
+    head = re.search(r"([\d,]+)\s+contributions?\s+in the last year", html)
+    print(f"public calendar: {len(out)} days, {sum(out.values())} contributions"
+          f" (page header says {head.group(1) if head else '?'})")
     return [{"date": d, "count": out[d]} for d in sorted(out)]
+
+
+def token_scopes():
+    """The token's OAuth scopes (never the token itself), for the run log."""
+    try:
+        req = urllib.request.Request("https://api.github.com/user", headers={
+            "Authorization": f"bearer {TOKEN}", "User-Agent": "profile-cards"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return r.headers.get("X-OAuth-Scopes") or "(none: built-in or fine-grained token)"
+    except Exception as e:
+        return f"unknown ({e})"
 
 
 def main():
@@ -132,6 +146,10 @@ def main():
     profile_repo = f"{LOGIN}/{LOGIN}".lower()
     repos = [repo_entry(n) for n in cc["commitContributionsByRepository"]
              if n["repository"]["nameWithOwner"].lower() != profile_repo]
+    print(f"api calendar: {sum(d['contributionCount'] for w in cc['contributionCalendar']['weeks'] for d in w['contributionDays'])}"
+          f" contributions, {cc['restrictedContributionsCount']} restricted; "
+          f"repos with commits: {len(repos)} ({sum(r['private'] for r in repos)} private); "
+          f"token scopes: {token_scopes()}")
     if not any(r["private"] for r in repos) and OUT.exists():
         # No private repos came back, so this token can't see them (the built-in
         # Actions token never can). Keep the private ones from the last run with a
