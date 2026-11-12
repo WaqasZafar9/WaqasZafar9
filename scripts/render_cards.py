@@ -265,7 +265,7 @@ def compute_stats(data):
 def find_portrait():
     """assets/portrait.* if you add one, otherwise the GitHub avatar fetch_data saved."""
     for stem in ("portrait", "avatar"):
-        for ext in ("jpg", "jpeg", "png", "webp"):
+        for ext in ("png", "jpg", "jpeg", "webp"):
             p = ROOT / "assets" / f"{stem}.{ext}"
             if p.exists():
                 return p
@@ -273,11 +273,14 @@ def find_portrait():
 
 
 def image_data_uri(path, px):
+    """Square crop at `px`, resampled with Lanczos and lightly sharpened; JPEG at
+    q92 with full-resolution colour (4:4:4) so edges stay crisp on retina screens."""
     from io import BytesIO
-    from PIL import Image, ImageOps
-    im = ImageOps.fit(Image.open(path).convert("RGB"), (px, px))
+    from PIL import Image, ImageFilter, ImageOps
+    im = ImageOps.fit(Image.open(path).convert("RGB"), (px, px), method=Image.LANCZOS)
+    im = im.filter(ImageFilter.UnsharpMask(radius=0.8, percent=60, threshold=2))
     buf = BytesIO()
-    im.save(buf, "JPEG", quality=86, optimize=True)
+    im.save(buf, "JPEG", quality=92, subsampling=0, optimize=True)
     return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
@@ -291,7 +294,7 @@ def card_hero():
     if photo:
         cy = H / 2
         c.defs.append(f'<clipPath id="pc{c.uid}"><circle cx="{P + s / 2}" cy="{cy}" r="{s / 2}"/></clipPath>')
-        c.add(f'<g{c.a("fade", 0)}><image href="{image_data_uri(photo, 224)}" x="{P}" y="{cy - s / 2}" '
+        c.add(f'<g{c.a("fade", 0)}><image href="{image_data_uri(photo, 336)}" x="{P}" y="{cy - s / 2}" '
               f'width="{s}" height="{s}" clip-path="url(#pc{c.uid})"/>'
               f'<circle cx="{P + s / 2}" cy="{cy}" r="{s / 2 - .5}" fill="none" stroke="{BORDER}"/></g>')
     text_w = W - P - x

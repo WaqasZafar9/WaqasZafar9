@@ -9,7 +9,7 @@ Env:
 
 Writes:
   data/contributions.json   calendar + the 6 repos you committed to most recently
-  assets/avatar.jpg         your GitHub profile picture
+  assets/avatar.png         your GitHub profile picture (full size, lossless)
   assets/orgs/<login>.png   logos for the orgs listed in render_cards.WORK_ORGS
 Private repos are stored with name, commit count and month only: no description,
 language or URL ever lands in this public file.
@@ -28,7 +28,7 @@ RECENT = 6
 QUERY = """
 query($login: String!) {
   user(login: $login) {
-    avatarUrl(size: 320)
+    avatarUrl(size: 460)
     contributionsCollection {
       restrictedContributionsCount
       contributionCalendar {
@@ -83,11 +83,14 @@ def save_image(url, path, size):
         from io import BytesIO
         from PIL import Image
         im = Image.open(BytesIO(http(url))).convert("RGBA")
-        im.thumbnail((size, size))
+        im.thumbnail((size, size), Image.LANCZOS)
         bg = Image.new("RGB", im.size, (15, 20, 17))
         bg.paste(im, mask=im.split()[3])
         path.parent.mkdir(parents=True, exist_ok=True)
-        bg.save(path, quality=88, optimize=True)
+        if path.suffix == ".png":
+            bg.save(path, optimize=True)
+        else:
+            bg.save(path, quality=92, optimize=True)
     except Exception as e:  # images are optional; never fail the run over one
         print(f"warning: could not fetch {url}: {e}")
 
@@ -167,7 +170,8 @@ def main():
     print(f"wrote {OUT.relative_to(ROOT)}: {len(days)} days, {data['total']} contributions, "
           f"{len(data['repos'])} recent repos")
 
-    save_image(u["avatarUrl"], ASSETS / "avatar.jpg", 320)
+    (ASSETS / "avatar.jpg").unlink(missing_ok=True)   # older lossy copy
+    save_image(u["avatarUrl"], ASSETS / "avatar.png", 460)
     sys.path.insert(0, str(Path(__file__).parent))
     from render_cards import WORK_ORGS
     for org in WORK_ORGS:
