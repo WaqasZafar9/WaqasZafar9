@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
-"""Refresh data/contributions.json from the GitHub GraphQL API.
+"""Refresh data/contributions.json and the images in assets/ from GitHub.
 
 Env:
-  GITHUB_TOKEN   token with read:user (a PAT also counts private contributions
-                 if "Include private contributions" is on in your profile settings)
-  GH_LOGIN       user to fetch (default: repo owner / WaqasZafar9)
-  FEATURED       optional comma list of repo names; default = your pinned repos
+  GITHUB_TOKEN   token for the GraphQL API. The built-in Actions token only sees
+                 public repos; set a PROFILE_TOKEN secret (classic PAT with `repo`
+                 and `read:org`) so private repos you commit to show up too.
+  GH_LOGIN       user to fetch (default WaqasZafar9)
+
+Writes:
+  data/contributions.json   calendar + the 6 repos you committed to most recently
+  assets/avatar.jpg         your GitHub profile picture
+  assets/orgs/<login>.png   logos for the orgs listed in render_cards.WORK_ORGS
+Private repos are stored with name, commit count and month only: no description,
+language or URL ever lands in this public file.
 """
 import json, os, sys, urllib.request
 from datetime import datetime, timezone
@@ -13,72 +20,111 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "contributions.json"
+ASSETS = ROOT / "assets"
 LOGIN = os.environ.get("GH_LOGIN") or "WaqasZafar9"
 TOKEN = os.environ.get("GITHUB_TOKEN")
+RECENT = 6
 
 QUERY = """
 query($login: String!) {
   user(login: $login) {
+    avatarUrl(size: 320)
     contributionsCollection {
+      restrictedContributionsCount
       contributionCalendar {
         totalContributions
         weeks { contributionDays { date contributionCount } }
       }
-    }
-    pinnedItems(first: 6, types: REPOSITORY) {
-      nodes { ... on Repository { ...R } }
-    }
-    repositories(first: 100, ownerAffiliations: OWNER, privacy: PUBLIC) {
-      nodes { ...R }
+      commitContributionsByRepository(maxRepositories: 100) {
+        repository {
+          nameWithOwner isPrivate description url stargazerCount forkCount
+          primaryLanguage { name color }
+        }
+        contributions(first: 1, orderBy: {direction: DESC}) {
+          totalCount
+          nodes { occurredAt }
+        }
+      }
     }
   }
-}
-fragment R on Repository {
-  name description url stargazerCount forkCount
-  primaryLanguage { name color }
 }
 """
 
 
-def gql(query, variables):
-    req = urllib.request.Request(
-        "https://api.github.com/graphql",
-        data=json.dumps({"query": query, "variables": variables}).encode(),
-        headers={"Authorization": f"bearer {TOKEN}", "Content-Type": "application/json",
-                 "User-Agent": "profile-cards"},
-    )
+def http(url, data=None, headers=None):
+    req = urllib.request.Request(url, data=data, headers={"User-Agent": "profile-cards", **(headers or {})})
     with urllib.request.urlopen(req, timeout=30) as r:
-        body = json.load(r)
+        return r.read()
+
+
+def gql(query, variables):
+    body = json.loads(http("https://api.github.com/graphql",
+                           json.dumps({"query": query, "variables": variables}).encode(),
+                           {"Authorization": f"bearer {TOKEN}", "Content-Type": "application/json"}))
     if body.get("errors"):
         sys.exit(f"GraphQL error: {body['errors']}")
     return body["data"]
 
 
-def repo(n):
-    lang = n.get("primaryLanguage") or {}
-    return {"name": n["name"], "description": n.get("description") or "", "url": n["url"],
-            "language": lang.get("name"), "languageColor": lang.get("color"),
-            "stars": n["stargazerCount"], "forks": n["forkCount"]}
+def repo_entry(node):
+    r, c = node["repository"], node["contributions"]
+    e = {"name": r["nameWithOwner"], "private": r["isPrivate"], "commits": c["totalCount"],
+         "last": c["nodes"][0]["occurredAt"][:10] if c["nodes"] else ""}
+    if not r["isPrivate"]:
+        lang = r.get("primaryLanguage") or {}
+        e.update(description=r.get("description") or "", url=r["url"], language=lang.get("name"),
+                 languageColor=lang.get("color"), stars=r["stargazerCount"], forks=r["forkCount"])
+    return e
+
+
+def save_image(url, path, size):
+    """Download an image and store it as a small JPEG/PNG for embedding."""
+    try:
+        from io import BytesIO
+        from PIL import Image
+        im = Image.open(BytesIO(http(url))).convert("RGBA")
+        im.thumbnail((size, size))
+        bg = Image.new("RGB", im.size, (15, 20, 17))
+        bg.paste(im, mask=im.split()[3])
+        path.parent.mkdir(parents=True, exist_ok=True)
+        bg.save(path, quality=88, optimize=True)
+    except Exception as e:  # images are optional; never fail the run over one
+        print(f"warning: could not fetch {url}: {e}")
 
 
 def main():
     if not TOKEN:
         sys.exit("GITHUB_TOKEN is not set")
     u = gql(QUERY, {"login": LOGIN})["user"]
-    cal = u["contributionsCollection"]["contributionCalendar"]
+    cc = u["contributionsCollection"]
+    cal = cc["contributionCalendar"]
     days = [{"date": d["date"], "count": d["contributionCount"]}
             for w in cal["weeks"] for d in w["contributionDays"]]
-    featured = [s.strip() for s in os.environ.get("FEATURED", "").split(",") if s.strip()]
-    if featured:
-        by_name = {n["name"].lower(): n for n in u["repositories"]["nodes"]}
-        repos = [repo(by_name[f.lower()]) for f in featured if f.lower() in by_name]
-    else:
-        repos = [repo(n) for n in u["pinnedItems"]["nodes"] if n]
+
+    profile_repo = f"{LOGIN}/{LOGIN}".lower()
+    repos = [repo_entry(n) for n in cc["commitContributionsByRepository"]
+             if n["repository"]["nameWithOwner"].lower() != profile_repo]
+    if cc["restrictedContributionsCount"] and OUT.exists():
+        # This token can't see private repos. Keep the private ones from the last
+        # run with a better token rather than silently dropping them.
+        seen = {r["name"] for r in repos}
+        old = json.loads(OUT.read_text()).get("repos", [])
+        repos += [r for r in old if r.get("private") and r["name"] not in seen]
+        print("note: private repos carried over; set PROFILE_TOKEN to refresh their counts")
+    repos.sort(key=lambda r: (r.get("last", ""), r.get("commits", 0)), reverse=True)
+
     data = {"login": LOGIN, "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-            "total": cal["totalContributions"], "days": days, "repos": repos}
+            "total": cal["totalContributions"], "days": days, "repos": repos[:RECENT]}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(data, indent=1) + "\n")
-    print(f"wrote {OUT.relative_to(ROOT)}: {len(days)} days, {data['total']} contributions, {len(repos)} repos")
+    print(f"wrote {OUT.relative_to(ROOT)}: {len(days)} days, {data['total']} contributions, "
+          f"{len(data['repos'])} recent repos")
+
+    save_image(u["avatarUrl"], ASSETS / "avatar.jpg", 320)
+    sys.path.insert(0, str(Path(__file__).parent))
+    from render_cards import WORK_ORGS
+    for org in WORK_ORGS:
+        save_image(f"https://github.com/{org['login']}.png?size=96", ASSETS / "orgs" / f"{org['login']}.png", 96)
 
 
 if __name__ == "__main__":

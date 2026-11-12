@@ -40,6 +40,25 @@ TILES = [  # exactly three, rendered side by side at width 32.5%
     {"slug": "linkedin", "label": "LinkedIn", "title": "m-waqas-zafar", "href": "https://www.linkedin.com/in/m-waqas-zafar"},
     {"slug": "email", "label": "Email", "title": "mwaqaszafar76@gmail.com", "href": "mailto:mwaqaszafar76@gmail.com"},
 ]
+WORK = [  # from the Experience section on waqaszafar.tech, newest first
+    {"role": "Software Engineer", "org": "Lab 23 Technology", "period": "Oct 2025 – Present"},
+    {"role": "Frontend Engineer Intern", "org": "Lab 23 Technology", "period": "Jul 2025 – Oct 2025"},
+    {"role": "App Developer Intern", "org": "Social Swirl", "period": "Aug 2024 – Oct 2024"},
+]
+WORK_ORGS = [  # GitHub orgs shown under the roles; logos are fetched into assets/orgs/
+    {"login": "lab23-sites", "name": "Lab 23 Sites"},
+    {"login": "Lynx-System", "name": "Lynx Systems"},
+    {"login": "Cooksbook", "name": "Cooksbook"},
+    {"login": "Milestone-Payment-App", "name": "Milestone Payment App"},
+    {"login": "Carbon-Credit-Team", "name": "Carbon Credit Team"},
+    {"login": "Global-Asset-Xchange", "name": "Global Asset Xchange"},
+]
+STACK = [
+    ("Web", ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"]),
+    ("Mobile", ["Flutter", "Dart", "React Native", "Expo"]),
+    ("Backend", ["Node.js", "Express", "REST APIs", "Firebase", "MongoDB", "MySQL"]),
+    ("Tools", ["Git", "GitHub Actions", "AWS", "Figma"]),
+]
 
 # ── Palette: avatar green for data only; everything else is neutral ──────────
 ACCENT = "#7ee08f"
@@ -55,7 +74,8 @@ FONT_FILES = {"s4": "Manrope-400.woff", "s6": "Manrope-600.woff", "s7": "Manrope
 FALLBACK = "Manrope,'Segoe UI',Helvetica,Arial,sans-serif"
 
 # Page timeline: cards play top to bottom (seconds at which each card starts)
-T_HERO, T_TILES, T_ACTIVITY, T_REPOS, T_REPO_STEP, T_GRAPH = 0.0, 0.35, 0.6, 0.95, 0.08, 1.3
+T_HERO, T_TILES, T_WORK, T_STACK, T_ACTIVITY, T_REPOS, T_REPO_STEP, T_GRAPH = \
+    0.0, 0.35, 0.55, 0.75, 0.95, 1.2, 0.08, 1.5
 
 # ── Fonts: metrics for layout, pyftsubset for embedding ──────────────────────
 _metrics = {}
@@ -243,19 +263,21 @@ def compute_stats(data):
 
 # ── Cards ────────────────────────────────────────────────────────────────────
 def find_portrait():
-    for ext in ("jpg", "jpeg", "png", "webp"):
-        p = ROOT / "assets" / f"portrait.{ext}"
-        if p.exists():
-            return p
+    """assets/portrait.* if you add one, otherwise the GitHub avatar fetch_data saved."""
+    for stem in ("portrait", "avatar"):
+        for ext in ("jpg", "jpeg", "png", "webp"):
+            p = ROOT / "assets" / f"{stem}.{ext}"
+            if p.exists():
+                return p
     return None
 
 
-def portrait_data_uri(path, px=280):
+def image_data_uri(path, px):
     from io import BytesIO
     from PIL import Image, ImageOps
-    im = ImageOps.fit(ImageOps.exif_transpose(Image.open(path)).convert("RGB"), (px, px), centering=(0.5, 0.35))
+    im = ImageOps.fit(Image.open(path).convert("RGB"), (px, px))
     buf = BytesIO()
-    im.save(buf, "JPEG", quality=84, optimize=True, progressive=True)
+    im.save(buf, "JPEG", quality=86, optimize=True)
     return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
@@ -263,22 +285,82 @@ def card_hero():
     W, H, P = 840, 200, 40
     c = Card("hero", W, H, T_HERO, f"{PROFILE['name']}. {PROFILE['line'].replace('[', '').replace(']', '')}")
     c.frame()
-    portrait = find_portrait()
-    text_w = W - 2 * P - (150 if portrait else 0)
-    c.add(f'<g{c.a("rise", 0)}>{c.text(P - 1, 80, PROFILE["name"], "s7", 40, FG, ls=-0.8)}</g>')
+    photo = find_portrait()
+    s = 112                                   # photo diameter
+    x = P + (s + 28 if photo else 0)          # text column starts after the photo
+    if photo:
+        cy = H / 2
+        c.defs.append(f'<clipPath id="pc{c.uid}"><circle cx="{P + s / 2}" cy="{cy}" r="{s / 2}"/></clipPath>')
+        c.add(f'<g{c.a("fade", 0)}><image href="{image_data_uri(photo, 224)}" x="{P}" y="{cy - s / 2}" '
+              f'width="{s}" height="{s}" clip-path="url(#pc{c.uid})"/>'
+              f'<circle cx="{P + s / 2}" cy="{cy}" r="{s / 2 - .5}" fill="none" stroke="{BORDER}"/></g>')
+    text_w = W - P - x
+    c.add(f'<g{c.a("rise", 0.05)}>{c.text(x - 1, 80, PROFILE["name"], "s7", 40, FG, ls=-0.8)}</g>')
     m = re.match(r"(.*)\[(.*)\](.*)", PROFILE["line"]) or re.match(r"(.*)()()", PROFILE["line"])
     a_, b_, z_ = m.groups()
     size = fit_size(a_ + b_ + z_, "s4", 19, text_w)
     spans = c.tspan(a_, "s4", MUTED) + c.tspan(b_, "s4", FG) + c.tspan(z_, "s4", MUTED)
-    c.add(f'<g{c.a("rise", 0.08)}><text x="{P}" y="118" font-size="{size:g}">{spans}</text></g>')
+    c.add(f'<g{c.a("rise", 0.12)}><text x="{x}" y="118" font-size="{size:g}">{spans}</text></g>')
     meta = "  ·  ".join(PROFILE["meta"])
-    c.add(f'<g{c.a("fade", 0.2)}>{c.text(P, 160, meta, "s4", 14, DIM)}</g>')
-    if portrait:
-        s = 120
-        x, y = W - P - s, (H - s) / 2
-        c.defs.append(f'<clipPath id="pc{c.uid}"><rect x="{x}" y="{y}" width="{s}" height="{s}" rx="8"/></clipPath>')
-        c.add(f'<g{c.a("fade", 0.1)}><image href="{portrait_data_uri(portrait)}" x="{x}" y="{y}" width="{s}" '
-              f'height="{s}" clip-path="url(#pc{c.uid})" preserveAspectRatio="xMidYMid slice"/></g>')
+    c.add(f'<g{c.a("fade", 0.24)}>{c.text(x, 156, meta, "s4", 14, DIM)}</g>')
+    return c.save()
+
+
+def card_work():
+    W, P = 840, 40
+    rows = len(WORK)
+    org_rows = (len(WORK_ORGS) + 2) // 3
+    H = 70 + rows * 44 + (40 + org_rows * 40 if WORK_ORGS else 0) + 14
+    c = Card("work", W, H, T_WORK, "Work history: " + "; ".join(
+        f"{w['role']} at {w['org']}, {w['period']}" for w in WORK))
+    c.frame()
+    c.add(f'<g{c.a("fade", 0)}>{c.text(P, 46, "Work", "s6", 15, FG)}</g>')
+    y = 90
+    for i, w in enumerate(WORK):
+        row = (c.text(P, y, w["role"], "s6", 15, FG)
+               + c.text(P + text_width(w["role"], "s6", 15) + 10, y, w["org"], "s4", 15, MUTED)
+               + c.text(W - P, y, w["period"], "s4", 13, DIM, "end"))
+        c.add(f'<g{c.a("rise", 0.06 + i * 0.06)}>{row}</g>')
+        if i < rows - 1:
+            c.add(f'<path d="M{P} {y + 20.5}H{W - P}" stroke="{BORDER}"/>')
+        y += 44
+    if WORK_ORGS:
+        y += 8
+        c.add(f'<path d="M{P} {y - 22.5}H{W - P}" stroke="{BORDER}"/>')
+        c.add(f'<g{c.a("fade", 0.3)}>{c.text(P, y + 4, "Teams on GitHub", "s4", 13, DIM)}</g>')
+        col = (W - 2 * P) / 3
+        for i, org in enumerate(WORK_ORGS):
+            ox, oy = P + (i % 3) * col, y + 22 + (i // 3) * 40
+            logo = ROOT / "assets" / "orgs" / f"{org['login']}.png"
+            if logo.exists():
+                c.defs.append(f'<clipPath id="o{i}{c.uid}"><rect x="{ox}" y="{oy}" width="24" height="24" rx="6"/></clipPath>')
+                mark = (f'<image href="{image_data_uri(logo, 48)}" x="{ox}" y="{oy}" width="24" height="24" '
+                        f'clip-path="url(#o{i}{c.uid})"/>')
+            else:  # no logo yet: a quiet initial
+                mark = (f'<rect x="{ox}" y="{oy}" width="24" height="24" rx="6" fill="{EMPTY}" stroke="{BORDER}"/>'
+                        + c.text(ox + 12, oy + 16.5, org["name"][0], "s6", 12, MUTED, "middle"))
+            name = ellipsize(org["name"], "s4", 14, col - 44)
+            c.add(f'<g{c.a("rise", 0.36 + i * 0.04)}>{mark}{c.text(ox + 34, oy + 17, name, "s4", 14, FG)}</g>')
+    return c.save()
+
+
+def card_stack():
+    W, P = 840, 40
+    H = 70 + len(STACK) * 42 + 8
+    c = Card("stack", W, H, T_STACK, "Stack: " + "; ".join(f"{g}: {', '.join(items)}" for g, items in STACK))
+    c.frame()
+    c.add(f'<g{c.a("fade", 0)}>{c.text(P, 46, "Stack", "s6", 15, FG)}</g>')
+    y = 72
+    for i, (group, items) in enumerate(STACK):
+        parts = [c.text(P, y + 19, group, "s4", 13, DIM)]
+        x = P + 110
+        for it in items:
+            w = text_width(it, "s4", 13.5) + 24
+            parts.append(f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="28" rx="6" fill="none" stroke="{BORDER}"/>'
+                         + c.text(x + 12, y + 19, it, "s4", 13.5, FG))
+            x += w + 8
+        c.add(f'<g{c.a("rise", 0.06 + i * 0.06)}>{"".join(parts)}</g>')
+        y += 42
     return c.save()
 
 
@@ -332,17 +414,39 @@ def card_activity(st):
     return c.save()
 
 
+def month_year(iso):
+    return f"{calendar.month_abbr[int(iso[5:7])]} {iso[:4]}" if iso else ""
+
+
 def card_repo(i, r):
-    W, H, P = 412, 132, 22
+    """A repo you committed to recently: yours or anyone's. Private repos show only
+    owner/name, your commit count and month; no description, language or link."""
+    W, H, P = 412, 124, 22
+    owner, _, name = r["name"].partition("/")
     c = Card(f"repo-{re.sub(r'[^A-Za-z0-9_.-]', '-', r['name'])}", W, H, T_REPOS + i * T_REPO_STEP,
-             f"{r['name']}: {r.get('description') or 'repository'}")
+             f"{r['name']}: {fmt(r.get('commits', 0))} commits in the last year"
+             + (" (private repository)" if r.get("private") else ""))
     c.frame()
-    c.add(f'<g{c.a("rise", 0)}>{c.text(P, 40, ellipsize(r["name"], "s6", 16, W - 2 * P - 20), "s6", 16, FG)}'
-          f'{arrow(W - P - 9, 30, DIM)}</g>')
-    desc = r.get("description") or ""
-    for j, ln in enumerate(wrap(desc, "s4", 13.5, W - 2 * P, 2)):
-        c.add(f'<g{c.a("rise", 0.05 + j * 0.03)}>{c.text(P, 66 + j * 20, ln, "s4", 13.5, MUTED)}</g>')
-    y, x, foot = H - 20, P, []
+    right = 64 if r.get("private") else 24
+    o = ellipsize(owner + " / ", "s4", 15, (W - 2 * P - right) * 0.55)
+    n = ellipsize(name, "s6", 15, W - 2 * P - right - text_width(o, "s4", 15))
+    head = c.text(P, 38, o, "s4", 15, MUTED) + c.text(P + text_width(o, "s4", 15), 38, n, "s6", 15, FG)
+    if r.get("private"):
+        pw = text_width("Private", "s4", 11.5) + 16
+        head += (f'<rect x="{W - P - pw:.1f}" y="24" width="{pw:.1f}" height="20" rx="10" fill="none" stroke="{BORDER}"/>'
+                 + c.text(W - P - pw / 2, 38, "Private", "s4", 11.5, DIM, "middle"))
+    else:
+        head += arrow(W - P - 9, 28, DIM)
+    c.add(f'<g{c.a("rise", 0)}>{head}</g>')
+    commits = fmt(r.get("commits", 0))
+    unit = "commit" if r.get("commits") == 1 else "commits"
+    c.add(f'<g{c.a("rise", 0.06)}>{c.text(P, 74, commits, "s7", 20, FG, ls=-0.3)}'
+          f'{c.text(P + text_width(commits, "s7", 20, -0.3) + 6, 74, unit + " in the last year", "s4", 13.5, MUTED)}</g>')
+    y, x, foot = H - 22, P, []
+    if r.get("last"):
+        t = "Last commit " + month_year(r["last"])
+        foot.append(c.text(x, y, t, "s4", 12.5, DIM))
+        x += text_width(t, "s4", 12.5) + 18
     if r.get("language"):
         foot.append(f'<circle cx="{x + 4}" cy="{y - 4.5}" r="4" fill="{r.get("languageColor") or DIM}"/>')
         foot.append(c.text(x + 14, y, r["language"], "s4", 12.5, DIM))
@@ -350,9 +454,6 @@ def card_repo(i, r):
     if r.get("stars"):
         foot.append(star(x, y - 12, 14, DIM))
         foot.append(c.text(x + 18, y, fmt(r["stars"]), "s4", 12.5, DIM))
-        x += 18 + text_width(fmt(r["stars"]), "s4", 12.5) + 18
-    if r.get("forks"):
-        foot.append(c.text(x, y, f"{fmt(r['forks'])} fork" + ("" if r["forks"] == 1 else "s"), "s4", 12.5, DIM))
     c.add(f'<g{c.a("fade", 0.15)}>{"".join(foot)}</g>')
     return c.save()
 
@@ -395,15 +496,16 @@ def card_graph(st, n_repos):
 # ── README block + preview ───────────────────────────────────────────────────
 def update_readme(repos, cards):
     """Rewrite the block between <!-- repos:start --> and <!-- repos:end --> so the
-    README always links one card per featured repo, two per row."""
+    README shows one card per recent repo, two per row. Public repos link to GitHub;
+    private ones are a plain image (the link would 404 for visitors)."""
     readme = ROOT / "README.md"
     if not readme.exists():
         return
-    rows = []
-    for i in range(0, len(repos), 2):
-        cells = " ".join(f'<a href="{r["url"]}"><img src="cards/{p.name}" width="49%" alt="{escape(r["name"])}"></a>'
-                         for r, p in zip(repos[i:i + 2], cards[i:i + 2]))
-        rows.append(f'<p align="center">\n  {cells}\n</p>')
+    def cell(r, p):
+        img = f'<img src="cards/{p.name}" width="49%" alt="{escape(r["name"])}">'
+        return img if r.get("private") or not r.get("url") else f'<a href="{r["url"]}">{img}</a>'
+    rows = [f'<p align="center">\n  ' + " ".join(cell(r, p) for r, p in zip(repos[i:i + 2], cards[i:i + 2])) + "\n</p>"
+            for i in range(0, len(repos), 2)]
     block = "<!-- repos:start -->\n" + "\n".join(rows) + "\n<!-- repos:end -->"
     text = readme.read_text(encoding="utf-8")
     new = re.sub(r"<!-- repos:start -->.*?<!-- repos:end -->", lambda _: block, text, flags=re.S)
@@ -413,13 +515,14 @@ def update_readme(repos, cards):
 
 def write_preview(tiles, repos):
     row = lambda imgs, w: "".join(f'<img src="cards/{p.name}" width="{w}">' for p in imgs)
+    one = lambda n: f'<p>{row([CARDS / n], "100%")}</p>'
     pairs = "".join(f'<p>{row(repos[i:i + 2], "49%")}</p>' for i in range(0, len(repos), 2))
     (ROOT / "preview.html").write_text(
         "<!doctype html><meta charset=utf-8><title>Profile cards preview</title>"
         "<style>body{background:#0d1117;margin:0;padding:32px 16px}main{max-width:838px;margin:auto}"
         "p{margin:0 0 10px;display:flex;justify-content:space-between}img{display:block}</style><main>"
-        f'<p>{row([CARDS / "hero.svg"], "100%")}</p><p>{row(tiles, "32.5%")}</p>'
-        f'<p>{row([CARDS / "activity.svg"], "100%")}</p>{pairs}<p>{row([CARDS / "graph.svg"], "100%")}</p></main>')
+        + one("hero.svg") + f'<p>{row(tiles, "32.5%")}</p>' + one("work.svg") + one("stack.svg")
+        + one("activity.svg") + pairs + one("graph.svg") + "</main>")
 
 
 def main():
@@ -430,8 +533,7 @@ def main():
         old.unlink()
     out = [card_hero()]
     tiles = [card_tile(i, t) for i, t in enumerate(TILES)]
-    out += tiles
-    out.append(card_activity(st))
+    out += tiles + [card_work(), card_stack(), card_activity(st)]
     repo_cards = [card_repo(i, r) for i, r in enumerate(repos)]
     out += repo_cards
     out.append(card_graph(st, len(repos)))
