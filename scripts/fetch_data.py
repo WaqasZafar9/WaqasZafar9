@@ -92,6 +92,30 @@ def save_image(url, path, size):
         print(f"warning: could not fetch {url}: {e}")
 
 
+def public_calendar():
+    """The calendar exactly as visitors see it on the profile page. With "Private
+    contributions" turned on in profile settings, it counts private work too, which
+    the built-in Actions token can't see through the API."""
+    import re
+    try:
+        html = http(f"https://github.com/users/{LOGIN}/contributions").decode("utf-8", "replace")
+    except Exception as e:
+        print(f"warning: could not read the public calendar: {e}")
+        return []
+    by_id = {}                                   # cell id -> date, whatever the attribute order
+    for tag in re.findall(r"<td\b[^>]*ContributionCalendar-day[^>]*>", html):
+        d, i = re.search(r'data-date="([\d-]+)"', tag), re.search(r'\sid="([^"]+)"', tag)
+        if d and i:
+            by_id[i.group(1)] = d.group(1)
+    out = {}
+    for for_id, text in re.findall(r'<tool-tip[^>]*\bfor="([^"]+)"[^>]*>([^<]*)</tool-tip>', html):
+        d = by_id.get(for_id)
+        m = re.match(r"\s*(\d+|No) contribution", text)
+        if d and m:
+            out[d] = 0 if m.group(1) == "No" else int(m.group(1))
+    return [{"date": d, "count": out[d]} for d in sorted(out)]
+
+
 def main():
     if not TOKEN:
         sys.exit("GITHUB_TOKEN is not set")
@@ -100,6 +124,10 @@ def main():
     cal = cc["contributionCalendar"]
     days = [{"date": d["date"], "count": d["contributionCount"]}
             for w in cal["weeks"] for d in w["contributionDays"]]
+    public = public_calendar()
+    if public and sum(d["count"] for d in public) > sum(d["count"] for d in days):
+        days = public          # the profile page includes private contributions; the API token may not
+    cal = {"totalContributions": sum(d["count"] for d in days)}
 
     profile_repo = f"{LOGIN}/{LOGIN}".lower()
     repos = [repo_entry(n) for n in cc["commitContributionsByRepository"]
