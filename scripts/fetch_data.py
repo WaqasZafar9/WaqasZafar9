@@ -40,7 +40,7 @@ query($login: String!) {
           nameWithOwner isPrivate description url stargazerCount forkCount
           primaryLanguage { name color }
         }
-        contributions(first: 1, orderBy: {direction: DESC}) {
+        contributions(first: 1, orderBy: {field: OCCURRED_AT, direction: DESC}) {
           totalCount
           nodes { occurredAt }
         }
